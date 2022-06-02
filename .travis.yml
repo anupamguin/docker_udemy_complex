@@ -9,7 +9,7 @@ script:
   - docker run programmingboy/react-test npm test -- --coverage
   #- docker run -e CI=true programmingboy/docker-test npm run test
 
-after_success:
+after_script:
   - sudo docker build --tag=programmingboy/multi-client --force-rm=true .
   - sudo docker build --tag=programmingboy/multi-nginx --force-rm=true .
   - sudo docker build --tag=programmingboy/multi-server --force-rm=true .
