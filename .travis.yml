@@ -10,10 +10,16 @@ script:
   #- docker run -e CI=true programmingboy/docker-test npm run test
 
 after_success:
-  - docker build -t programmingboy/multi-client ./client
-  - docker build -t programmingboy/multi-nginx ./nginx
-  - docker build -t programmingboy/multi-server ./server
-  - docker build -t programmingboy/multi-worker ./worker
+  - sudo docker build --tag=programmingboy/multi-client --force-rm=true .
+  - sudo docker build --tag=programmingboy/multi-nginx --force-rm=true .
+  - sudo docker build --tag=programmingboy/multi-server --force-rm=true .
+  - sudo docker build --tag=programmingboy/multi-worker --force-rm=true .
+  
+  #- docker build -t programmingboy/multi-client ./client
+  #- docker build -t programmingboy/multi-nginx ./nginx
+  #- docker build -t programmingboy/multi-server ./server
+  #- docker build -t programmingboy/multi-worker ./worker
+  
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
